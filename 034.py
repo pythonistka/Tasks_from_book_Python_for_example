@@ -4,7 +4,7 @@ print("1) Квадрат")
 print("2) Треугольник")
 num_1 = 1
 num_2 = 2
-enter_num = int(input("Введите введите номер: "))
+enter_num = int(input("Введите номер: "))
 if enter_num == num_1:
     side_of_square = int(input("Введите длину стороны квадрата: "))
     area_square = side_of_square**2
