@@ -7,7 +7,7 @@ if answer == answer_1:
         print(i)
 elif answer == answer_2:
     num = int(input("Введите число меньше 20: "))
-    for i in range(20, num -1, -1):
+    for i in range(20, num - 1, -1):
         print(i)
 else:
     print("Я вас не понимаю")
