@@ -1,0 +1,5 @@
+countries = ("Китай", "Индия", "Япония", "Беларусь", "Армения")
+print(type(countries))
+print(countries)
+country = input("Введите название страны: ")
+print(f"По счету ваша страна в списке: {countries.index(country)}")
