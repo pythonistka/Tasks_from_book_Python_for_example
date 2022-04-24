@@ -1,3 +1,3 @@
-lesson = input(f"Введите название вашего любимого урока в школе: ")
+lesson = input(f"Введите название вашего любимого предмета в школе: ")
 for letter in lesson:
-    print(letter, end="-")
+    print(letter, end = "-")
