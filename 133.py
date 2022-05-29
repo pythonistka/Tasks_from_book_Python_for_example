@@ -4,8 +4,8 @@ from tkinter import *
 def click():
     name = textbox1.get()
     message = str("Привет" + name)
-    textbox2["bg"] = "yellow"
-    textbox2["fg"] = "blue"
+    textbox2["bg"] = "pink"
+    textbox2["fg"] = "black"
     textbox2["text"] = message
 
 
@@ -28,10 +28,10 @@ textbox1["justify"] = "center"
 textbox1.focus()
 
 button1 = Button(text="Нажать", command=click)
-button1.place(x=30, y=230, width=120, height=25)
+button1.place(x=30, y=230, width=120, height=30)
 
 textbox2 = Message(text="")
-textbox2.place(x=200, y=230, width=200, height=25)
+textbox2.place(x=200, y=230, width=200, height=30)
 textbox2["bg"] = "white"
 textbox2["fg"] = "black"
 window.mainloop()
