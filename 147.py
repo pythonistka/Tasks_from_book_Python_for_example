@@ -1,8 +1,15 @@
 import random
 
+color_list = ["1", "2", "3", "4", "5", "6"]
 
-def start():
-    color_list = ["1", "2", "3", "4", "5", "6"]
+
+def create_the_secret_list():
+    four_color_from_list = random.choices(color_list, k=4)
+    print(four_color_from_list)
+    return four_color_from_list
+
+
+def start(four_color_from_list):
     print("Из заданного списка цветов, выбери 4:")
     print("[1] Красный")
     print("[2] Оранжевый")
@@ -11,7 +18,7 @@ def start():
     print("[5] Голубой")
     print("[6] Фиолетовый")
     try_again = True
-    while try_again == True:
+    while try_again:
         select_nums = list(input("Введи без пробелов номера выбранных цветов: "))
         t = 0
         for i in select_nums:
@@ -21,10 +28,6 @@ def start():
             else:
                 try_again = False
     print("\n")
-    print(select_nums)
-
-    four_color_from_list = random.choices(color_list, k=4)
-    print(four_color_from_list)
 
     correct = 0
     wrong_place = 0
@@ -51,6 +54,7 @@ def start():
     print(f"Правильных цветов на правильном месте:{correct}")
     print(f"Правильных цветов на неправильном месте:{wrong_place}")
 
+    return correct, wrong_place
 
 
 def rule():
@@ -76,7 +80,15 @@ def main():
             rule()
             x = 0
         elif select == 2:
-            start()
+            (four_color_from_list) = create_the_secret_list()
+            score = 0
+            play = True
+            while play == True:
+                (correct, wrong_place) = start(four_color_from_list)
+                score = score + 1
+                if correct == 4:
+                    play = False
+            print(f"Вы победили с {score} попытки")
             x = x + 1
         elif select == 3:
             break
