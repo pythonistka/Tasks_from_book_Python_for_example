@@ -2,24 +2,55 @@ import random
 
 
 def start():
-        print("Из заданного списка цветов, выбери 4:")
-        print("[1] Красный")
-        print("[2] Оранжевый")
-        print("[3] Желтый")
-        print("[4] Зеленый")
-        print("[5] Голубой")
-        print("[6] Фиолетовый")
-        select_nums = []
-        select_nums = input("Введи поочередно, через запятую выбранные цвета: ")
-        print("\n")
-        print(select_nums)
+    color_list = ["1", "2", "3", "4", "5", "6"]
+    print("Из заданного списка цветов, выбери 4:")
+    print("[1] Красный")
+    print("[2] Оранжевый")
+    print("[3] Желтый")
+    print("[4] Зеленый")
+    print("[5] Голубой")
+    print("[6] Фиолетовый")
+    try_again = True
+    while try_again == True:
+        select_nums = list(input("Введи без пробелов номера выбранных цветов: "))
+        t = 0
+        for i in select_nums:
+            t = t + 1
+            if i not in color_list:
+                print(f"Значение на {t} месте некорректно, цвет с таким номером не существует")
+            else:
+                try_again = False
+    print("\n")
+    print(select_nums)
 
-        color_list = [1, 2, 3, 4, 5, 6]
-        four_color_from_list = random.choices(color_list, k=4)
-        print(four_color_from_list)
+    four_color_from_list = random.choices(color_list, k=4)
+    print(four_color_from_list)
 
+    correct = 0
+    wrong_place = 0
+    if select_nums[0] == four_color_from_list[0]:
+        correct = correct + 1
+    elif select_nums[0] == four_color_from_list[1] or select_nums[0] == four_color_from_list[2] or select_nums[0] == \
+            four_color_from_list[3]:
+        wrong_place = wrong_place + 1
+    if select_nums[1] == four_color_from_list[1]:
+        correct = correct + 1
+    elif select_nums[1] == four_color_from_list[0] or select_nums[1] == four_color_from_list[2] or select_nums[1] == \
+            four_color_from_list[3]:
+        wrong_place = wrong_place + 1
+    if select_nums[2] == four_color_from_list[2]:
+        correct = correct + 1
+    elif select_nums[2] == four_color_from_list[0] or select_nums[2] == four_color_from_list[1] or select_nums[2] == \
+            four_color_from_list[3]:
+        wrong_place = wrong_place + 1
+    if select_nums[3] == four_color_from_list[3]:
+        correct = correct + 1
+    elif select_nums[3] == four_color_from_list[0] or select_nums[3] == four_color_from_list[1] or select_nums[3] == \
+            four_color_from_list[2]:
+        wrong_place = wrong_place + 1
+    print(f"Правильных цветов на правильном месте:{correct}")
+    print(f"Правильных цветов на неправильном месте:{wrong_place}")
 
-pass
 
 
 def rule():
