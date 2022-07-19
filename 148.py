@@ -2,14 +2,50 @@ import csv
 
 
 def create():
-    file = open("Users.csv", "a")
-    new_record = "Oleg, Oleg21\n"
-    file.write(str(new_record))
+    file = open("Users.csv", "r")
+    new_name = input("Введите имя пользователя: ")
+    reader = csv.reader(file)
+    count = 0
+    for row in file:
+        if new_name in str(row):
+            print("Данный пользователь уже существует")
+            count = count + 1
+    if count == 0:
+        new_password = input("Введите пароль: ")
+        new_record = new_name + ", " + new_password + "\n"
+        file = open("Users.csv", "a")
+        file.write(str(new_record))
     file.close()
 
 
 def change():
-    pass
+    file = open("Users.csv", "r")
+    change_name = input("Введите имя пользователя для изменения пароля: ")
+    reader = csv.reader(file)
+    for row in file:
+        if change_name in str(row):
+            file = list(csv.reader(open("Users.csv")))
+            tmp = []
+            for rows in file:
+                tmp.append(rows)
+
+            for step in tmp:
+                if change_name in step:
+                    step.clear()
+
+            # file = open("Users.csv", "w")
+            # x = 0
+            # for liner in tmp:
+            #     new_record = tmp[x][0] + ", " + tmp[x][1] + "\n"
+            #     file.write(new_record)
+            #     x = x + 1
+            # file.close()
+            #
+            # new_password = input("Введите новый пароль: ")
+            # new_record = change_name + ", " + new_password + "\n"
+            # file = open("Users.csv", "a")
+            # file.write(str(new_record))
+            # file.close()
 
 
 def display():
