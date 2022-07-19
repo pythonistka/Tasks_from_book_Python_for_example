@@ -1,3 +1,25 @@
+import csv
+
+
+def create():
+    file = open("Users.csv", "a")
+    new_record = "Oleg, Oleg21\n"
+    file.write(str(new_record))
+    file.close()
+
+
+def change():
+    pass
+
+
+def display():
+    file = open("Users.csv", "r")
+    reader = csv.reader(file)
+    x = 1
+    for row in reader:
+        print(x, row[0])
+        x = x + 1
+    file.close()
 
 
 def main():
