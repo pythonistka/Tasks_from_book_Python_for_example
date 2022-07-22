@@ -2,20 +2,26 @@ import csv
 
 
 def create():
-    file = open("Users.csv", "r")
+    file = list(csv.reader(open("Users.csv", "r")))
+    tmp=[]
+    for x in file:
+        tmp.append(x)
+
     new_name = input("Введите имя пользователя: ")
-    reader = csv.reader(file)
+    inlist = False
     count = 0
-    for row in file:
-        if new_name in str(row):
+    for y in tmp:
+        if new_name in tmp[count][0]:
             print("Данный пользователь уже существует")
-            count = count + 1
-    if count == 0:
+            inlist = True
+        count = count + 1
+    if inlist == False:
         new_password = input("Введите пароль: ")
         new_record = new_name + ", " + new_password + "\n"
         file = open("Users.csv", "a")
         file.write(str(new_record))
     file.close()
+
 
 
 def change():
@@ -28,24 +34,18 @@ def change():
             tmp = []
             for rows in file:
                 tmp.append(rows)
-
+            change_password = input("Введите новый пароль: ")
+            ID = change_name.index(change_name)
+            tmp[ID][1] = change_password
+            print(tmp[ID][1])
+            file = open("Users.csv", "w")
+            x = 0
             for step in tmp:
-                if change_name in step:
-                    step.clear()
+                new_record = tmp[x][0] + ", " + tmp[x][1] + "\n"
+                file.write(new_record)
+                x = x + 1
+            file.close()
 
-            # file = open("Users.csv", "w")
-            # x = 0
-            # for liner in tmp:
-            #     new_record = tmp[x][0] + ", " + tmp[x][1] + "\n"
-            #     file.write(new_record)
-            #     x = x + 1
-            # file.close()
-            #
-            # new_password = input("Введите новый пароль: ")
-            # new_record = change_name + ", " + new_password + "\n"
-            # file = open("Users.csv", "a")
-            # file.write(str(new_record))
-            # file.close()
 
 
 def display():
@@ -53,7 +53,7 @@ def display():
     reader = csv.reader(file)
     x = 1
     for row in reader:
-        print(x, row[0])
+        print(x, row)
         x = x + 1
     file.close()
 
