@@ -1,9 +1,17 @@
 import csv
 
 
+def get_data():
+    file = list(csv.reader(open("Users.csv")))
+    tmp = []
+    for x in file:
+        tmp.append(x)
+    return tmp
+
+
 def create():
     file = list(csv.reader(open("Users.csv", "r")))
-    tmp=[]
+    tmp = []
     for x in file:
         tmp.append(x)
 
@@ -21,7 +29,6 @@ def create():
         file = open("Users.csv", "a")
         file.write(str(new_record))
     file.close()
-
 
 
 def change():
@@ -45,7 +52,6 @@ def change():
                 file.write(new_record)
                 x = x + 1
             file.close()
-
 
 
 def display():
