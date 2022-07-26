@@ -9,26 +9,65 @@ def get_data():
     return tmp
 
 
-def create():
-    file = list(csv.reader(open("Users.csv", "r")))
-    tmp = []
-    for x in file:
-        tmp.append(x)
+def create_user_id(tmp):
+    name_again = True
+    while name_again:
+        user_id = input("Введите имя пользователя: ")
+        user_id.lower()
+        inlist = False
+        row = 0
+        for y in tmp:
+            if user_id in tmp[row][0]:
+                print("Данный пользователь уже существует")
+                inlist = True
+            row = row + 1
+        if not inlist:
+            name_again = False
+    return user_id
 
-    new_name = input("Введите имя пользователя: ")
-    inlist = False
-    count = 0
-    for y in tmp:
-        if new_name in tmp[count][0]:
-            print("Данный пользователь уже существует")
-            inlist = True
-        count = count + 1
-    if inlist == False:
-        new_password = input("Введите пароль: ")
-        new_record = new_name + ", " + new_password + "\n"
-        file = open("Users.csv", "a")
-        file.write(str(new_record))
-    file.close()
+
+def create_password():
+    symbol_list = ["!", "£", "$", "%", "^", "&", "*", "(",")", "?", "@", "#"]
+    num_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    try_again = True
+    while try_again:
+        score = 0
+        low_sym = False
+        up_sym = False
+        symbol_in = False
+        number_in = False
+        password = input("Введите пароль: ")
+        lenght = len(password)
+        if lenght >= 8:
+            score = score + 1
+        for x in password:
+            if x.islower():
+                low_sym = True
+            if x.isupper():
+                up_sym = True
+            if x in symbol_list:
+                symbol_in = True
+            if x in num_list:
+                number_in = True
+        if low_sym == True:
+            score = score + 1
+        if up_sym == True:
+            score = score + 1
+        if symbol_in == True:
+            score = score + 1
+        if number_in == True:
+            score = score + 1
+        if score == 1 or score == 2:
+            print("Ненадежный пароль, попробуй еще раз")
+        elif score == 3 or score == 4:
+            print("Умеренно надежный пароль")
+            again = input("Попробуешь еще раз?(да/нет): ")
+            again.lower()
+            if again != "нет":
+                continue
+            try_again = False
+    else:
+            return password
 
 
 def change():
@@ -65,6 +104,7 @@ def display():
 
 
 def main():
+    tmp = get_data()
     run = True
     while run:
         print("[1] Создать нового пользователя")
@@ -73,7 +113,12 @@ def main():
         print("[4] Уйти")
         select = int(input("Введите номер команды: "))
         if select == 1:
-            create()
+            user_id = create_user_id(tmp)
+            password = create_password()
+            file = open("Users.csv", "a")
+            new_record = user_id + ", " + password + "\n"
+            file.write(str(new_record))
+            file.close()
         elif select == 2:
             change()
         elif select == 3:
