@@ -61,12 +61,16 @@ def create_password():
             print("Ненадежный пароль, попробуй еще раз")
         elif score == 3 or score == 4:
             print("Умеренно надежный пароль")
-            again = input("Попробуешь еще раз?(да/нет): ")
+            again = input("Попробуешь усложнить пароль?(да/нет): ")
             again.lower()
             if again != "нет":
                 continue
             try_again = False
-    else:
+        password_repeat = input("Повторите пароль: ")
+        if password_repeat != password:
+            print("Пароли не совпадают")
+            main()
+        else:
             return password
 
 
@@ -93,14 +97,11 @@ def change():
             file.close()
 
 
-def display():
-    file = open("Users.csv", "r")
-    reader = csv.reader(file)
+def display(tmp):
     x = 1
-    for row in reader:
+    for row in tmp:
         print(x, row)
         x = x + 1
-    file.close()
 
 
 def main():
@@ -122,7 +123,7 @@ def main():
         elif select == 2:
             change()
         elif select == 3:
-            display()
+            display(tmp)
         elif select == 4:
             run = False
         else:
